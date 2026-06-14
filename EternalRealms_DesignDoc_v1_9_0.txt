@@ -1,0 +1,43 @@
+ETERNAL REALMS DESIGN DOC v1.9.0
+
+V6.9 SKILL BOOK & ACTION BAR OVERHAUL
+
+Implemented:
+- New MainV69.gd extends the stable V6.8 Main.gd.
+- Main scene now uses MainV69.gd.
+- Skill Book foundation with 8 abilities per class.
+- Classes are no longer limited to only 4 abilities.
+- 6 active skill slots:
+  LMB = Move / Interact
+  RMB = Core ability slot
+  1 = Active slot
+  2 = Active slot
+  3 = Active slot
+  4 = Active slot
+  5 = Active slot
+
+Skill Book Controls:
+- K opens Character Screen.
+- Skills tab shows the class skill book.
+- F1-F8 selects an ability.
+- + ranks up selected ability.
+- - refunds selected ability rank.
+- Z assigns selected ability to RMB.
+- X assigns selected ability to 1.
+- C assigns selected ability to 2.
+- V assigns selected ability to 3.
+- B assigns selected ability to 4.
+- N assigns selected ability to 5.
+
+Class Skill Book Foundation:
+- Warrior: Cleave, Charge, Ground Slam, Ragnarok, Whirlwind, Leap, War Cry, Execute.
+- Rogue: Poison Arrow, Dash, Fan of Knives, Endless Barrage, Quick Shot, Shadow Step, Rain of Arrows, Smoke Bomb.
+- Paladin: Smite, Heal, Consecration, Final Judgment, Holy Shield, Blessed Hammer, Judgement, Radiant Charge.
+- Mage: Fireball, Teleport, Ice Nova, Apocalypse, Lightning Bolt, Meteor, Arcane Nova, Mana Surge.
+
+Next recommended milestone:
+V7.0 Skill Specializations
+- Rank 5 skill choices.
+- Legendary skill modifiers.
+- Better visual action bar buttons.
+- Drag/drop assignment later.
