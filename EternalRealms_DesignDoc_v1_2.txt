@@ -1,0 +1,22 @@
+ETERNAL REALMS DESIGN DOCUMENT v1.2
+
+V6.2 ADDED:
+- Improved equipment flow
+- Inventory item selection
+- Equip selected item with E
+- Health potions
+- Mana potions
+- Health regeneration stat
+- Mana regeneration stat
+- Potion drops
+- Merchant potion purchases
+- Dev potion testing
+
+POTION RULES:
+Health potion restores 45% max HP.
+Mana potion restores 45% max Mana.
+Potion max stack: 20 each.
+
+NEW ITEM STATS:
+Health Regen
+Mana Regen

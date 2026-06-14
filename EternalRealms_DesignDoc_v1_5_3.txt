@@ -1,0 +1,7 @@
+ETERNAL REALMS DESIGN DOC v1.5.3
+
+BUGFIX:
+- update_inventory_ui crash fixed.
+- Old Ring references removed from inventory/equipment summary.
+- Safe equipment dictionary access added.
+- Ring1/Ring2 are now the only ring equipment slots.

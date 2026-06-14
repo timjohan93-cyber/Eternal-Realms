@@ -1,0 +1,12 @@
+ETERNAL REALMS DESIGN DOC v1.5.6
+
+INVENTORY QUALITY OF LIFE:
+- Inventory sorting added.
+- Vendor selling added.
+- Stash postponed to later update.
+
+SELL FLOW:
+1. Open Inventory with I.
+2. Select item.
+3. Open Merchant with M.
+4. Press Sell Selected.

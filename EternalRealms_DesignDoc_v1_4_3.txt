@@ -1,0 +1,7 @@
+ETERNAL REALMS DESIGN DOCUMENT v1.4.3
+
+UI CLICK BLOCKER:
+- UI panels now consume mouse input.
+- Inventory and character screen can stay open together.
+- Clicking open windows no longer sends movement commands to the player.
+- Hold-to-move only works when the cursor is outside open UI windows.

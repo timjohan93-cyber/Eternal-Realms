@@ -1,0 +1,22 @@
+ETERNAL REALMS DESIGN DOCUMENT v1.3
+
+V6.3 ADDED:
+- Character equipment screen
+- Mouse-based equipment slot interaction
+- Inventory selection flow
+- Safer single-press input handling
+
+EQUIP FLOW:
+1. Press I to open inventory.
+2. Press item number to select an item.
+3. Press K to open character screen.
+4. Click the correct equipment slot.
+5. Item equips if slot matches.
+
+HOTKEYS:
+1-4 = skills
+Q = health potion
+W = mana potion
+I = inventory
+K = character screen
+E = equip selected shortcut

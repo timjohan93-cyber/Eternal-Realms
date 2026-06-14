@@ -1,0 +1,28 @@
+ETERNAL REALMS DESIGN DOCUMENT v1.4
+
+V6.4 IMPLEMENTED:
+- Belt equipment slot
+- Potion belt UI foundation
+- Q = Health Flask
+- E = Mana Flask
+- Inventory grid display
+- Clickable inventory slots
+- Paper doll equipment screen foundation
+- Belt affixes:
+  Potion Capacity
+  Potion Effect
+  Potion Duration
+  Gold Find
+  Magic Find
+- Utility flask framework:
+  Iron Skin
+  Lucky
+  Berserker
+  Shadow
+
+NEXT VERSION:
+V7 Talent Trees
+- Warrior: Berserker / Juggernaut / Weapon Master
+- Rogue: Assassin / Ranger / Shadow
+- Mage: Fire / Frost / Lightning
+- Paladin: Holy / Crusader / Retribution

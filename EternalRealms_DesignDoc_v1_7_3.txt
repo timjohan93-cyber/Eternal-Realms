@@ -1,0 +1,7 @@
+ETERNAL REALMS DESIGN DOC v1.7.3
+
+CLICKABLE PORTAL MASTER:
+- LMB interaction expanded.
+- Portal Master can be clicked.
+- Player moves to Portal Master, then enters dungeon when close.
+- This supports our long-term LMB = interact design.

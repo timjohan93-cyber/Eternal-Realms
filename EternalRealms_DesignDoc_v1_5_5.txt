@@ -1,0 +1,8 @@
+ETERNAL REALMS DESIGN DOC v1.5.5
+
+INPUT + RESOLUTION FIX:
+- 2560x1440 target resolution.
+- UI buttons are now responsible for UI clicks.
+- World click handling ignores open UI panels.
+- SHIFT + click equipped slot unequips item.
+- Normal click on equipped slot no longer removes item.

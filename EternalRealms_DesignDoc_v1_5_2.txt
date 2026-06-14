@@ -1,0 +1,6 @@
+ETERNAL REALMS DESIGN DOC v1.5.2
+
+BUGFIX:
+- Old single Ring slot fully replaced with Ring1 and Ring2.
+- Inventory/equipment summary now uses safe equipment.get().
+- Old saves migrate Ring equipment into Ring1.

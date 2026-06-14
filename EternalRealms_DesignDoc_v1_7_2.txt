@@ -1,0 +1,15 @@
+ETERNAL REALMS DESIGN DOC v1.7.2
+
+ESCAPE MENU:
+- ESC opens game menu.
+- Resume closes menu.
+- Options placeholder added.
+- Loot Filter can be selected directly.
+- Quit Game saves and exits.
+
+Future Options:
+- Resolution
+- Fullscreen
+- Sound
+- Controls
+- Graphics

@@ -1,0 +1,11 @@
+ETERNAL REALMS DESIGN DOC v1.5.4
+
+REAL EQUIPMENT SLOTS:
+- Visible inventory buttons.
+- Visible paper doll equipment buttons.
+- Fixed click detection.
+- Manual equipment flow:
+  1. Press I.
+  2. Press K.
+  3. Left-click inventory item.
+  4. Left-click matching equipment slot.

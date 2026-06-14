@@ -1,0 +1,22 @@
+ETERNAL REALMS DESIGN DOC v1.8.0
+
+V6.8 COMBAT BAR FOUNDATION
+
+Approved layout:
+- LMB = Interact / Move / Pick up / Basic Attack
+- RMB = Core Skill
+- 1-4 = Active Skills
+- Q = Health Flask
+- E = Mana Flask
+
+Implemented:
+- RMB skill casting.
+- Combat slot mapping.
+- Separate cooldown tracking.
+- HUD/action bar update.
+- Save/load support.
+
+Next:
+- Manual skill assignment UI.
+- Ultimate slot.
+- Skill specialization choices.

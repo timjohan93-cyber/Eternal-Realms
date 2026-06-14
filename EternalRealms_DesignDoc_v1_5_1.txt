@@ -1,0 +1,20 @@
+ETERNAL REALMS DESIGN DOC v1.5.1
+
+CHARACTER PAPER DOLL + STATS
+
+Approved:
+- Manual mouse equipment
+- Individual equipment slots
+- Ring1 and Ring2
+- Stat summary
+- Primary attributes:
+  Strength
+  Dexterity
+  Intellect
+  Willpower
+
+Current attribute effects:
+- Strength: HP and physical-style damage
+- Dexterity: crit chance
+- Intellect: mana and spell-style damage
+- Willpower: health/mana regeneration

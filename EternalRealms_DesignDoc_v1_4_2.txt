@@ -1,0 +1,13 @@
+ETERNAL REALMS DESIGN DOCUMENT v1.4.2
+
+QUALITY OF LIFE UPDATE:
+- Larger resolution: 1600x900.
+- Inventory and character screen can be open together.
+- Mouse hold movement added.
+- Equipment flow:
+  1. Press I to open inventory.
+  2. Press K to open character screen.
+  3. Click an inventory item.
+  4. Click the matching equipment slot.
+- Q = Health Flask.
+- E = Mana Flask.

@@ -1,0 +1,16 @@
+ETERNAL REALMS V6.5
+
+Character Progression Framework
+
+- Equipment Tab
+- Skills Tab
+- Passives Tab
+- Paragon Tab
+
+Future:
+- Skill Points
+- Passive Points
+- Skill Ranks
+- Talent Trees
+- World Tiers
+- Host-based Multiplayer

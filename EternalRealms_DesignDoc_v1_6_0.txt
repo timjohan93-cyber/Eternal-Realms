@@ -1,0 +1,19 @@
+ETERNAL REALMS DESIGN DOC v1.6.0
+
+V6.6 CHARACTER PROGRESSION & BUILDCRAFTING
+
+New:
+- Character tabs
+- Skill points
+- Passive points
+- Skill ranks
+- Passive ranks
+- Build analysis
+- Attack Speed
+- Cooldown Reduction
+- Pickup Radius
+
+Controls:
+- Open Character: K
+- Skills Tab: 1-4 rank skills, SHIFT+1-4 refund
+- Passives Tab: Q/W/E/R/T/Y rank passives, SHIFT+key refund

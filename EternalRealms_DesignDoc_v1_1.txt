@@ -1,0 +1,35 @@
+ETERNAL REALMS DESIGN DOCUMENT v1.1
+
+V6.1 IMPLEMENTED:
+- Legendary powers
+- Unique boss drops
+- Loot beams
+- Dev unique item spawning
+
+LEGENDARY POWERS:
+Chain Lightning - chance to hit nearby enemies.
+Vampiric - heals from damage dealt.
+Berserker - increased damage below half HP.
+Explosive - killed enemies explode.
+Treasure Hunter - increased gold drops.
+Fortune - improves loot quality.
+Arcane Echo - skills can double cast.
+Swift Strikes - faster basic attacks.
+Stone Skin - increased armor.
+Blood Armor - health bonus and heal on kill.
+
+UNIQUE BOSS ITEMS:
+Infernal Warden:
+- Warden's Hellblade
+- Infernal Plate
+- Ember Ring
+
+Frost Titan:
+- Titan's Frozen Crown
+- Glacier Staff
+- Frozen Heart Pendant
+
+Corrupted Ancient:
+- Heart of the Ancient
+- Rootbound Armor
+- Ancient Spirit Charm

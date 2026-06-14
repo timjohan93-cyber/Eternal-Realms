@@ -1,0 +1,6 @@
+ETERNAL REALMS DESIGN DOC v1.6.1
+
+INPUT RELIABILITY FIX:
+- UI should not block keyboard controls.
+- Dev panel captures its own keys.
+- World movement is blocked only when mouse is over UI.

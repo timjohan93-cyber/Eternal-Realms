@@ -1,0 +1,16 @@
+ETERNAL REALMS DESIGN DOC v1.7.1
+
+LOOT FILTER:
+- Press L to cycle filter modes.
+- Show All
+- Hide Common
+- Hide Common + Uncommon
+- Rare+
+- Legendary+
+- Godlike and Unique always visible.
+
+NEXT:
+- V6.7.2 Combat Bar 2.0
+- LMB = interact/basic
+- RMB = core skill
+- 1-4 = active skills
