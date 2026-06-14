@@ -4,7 +4,7 @@ Godot ARPG prototype inspired by Diablo, Path of Exile and Last Epoch-style prog
 
 ## Current working version
 
-**V6.8.1 Skill Book + Free Ability Assignment**
+**V6.9 Skill Book & Action Bar Overhaul**
 
 Current systems:
 - Loot drops with rarity
@@ -15,8 +15,24 @@ Current systems:
 - Clickable Portal Master
 - Combat bar foundation
 - Skill Book foundation
-- Free assignment to RMB / 1 / 2 / 3 / 4
+- 8 abilities per class foundation
+- Free assignment to RMB / 1 / 2 / 3 / 4 / 5
+
+## V6.9 controls
+
+Open Character Screen with `K`, then go to the Skills tab.
+
+Skill Book controls:
+- `F1-F8` select skill
+- `+` rank up selected skill
+- `-` refund selected skill rank
+- `Z` assign selected skill to RMB
+- `X` assign selected skill to 1
+- `C` assign selected skill to 2
+- `V` assign selected skill to 3
+- `B` assign selected skill to 4
+- `N` assign selected skill to 5
 
 ## Development workflow
 
-This repository will be used as the main working base for Eternal Realms going forward.
+This repository is now the main working base for Eternal Realms development.
