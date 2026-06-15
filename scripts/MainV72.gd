@@ -8,7 +8,7 @@ const MAX_GODLIKE_EQUIPPED := 2
 var godlike_aura: Polygon2D
 var godlike_orb_1: Polygon2D
 var godlike_orb_2: Polygon2D
-var godlike_aura_time := 0.0
+var godlike_aura_time: float = 0.0
 
 func _ready() -> void:
 	super._ready()
@@ -49,7 +49,7 @@ func create_godlike_aura_visuals() -> void:
 func make_circle_polygon(radius: float, points: int) -> PackedVector2Array:
 	var arr := PackedVector2Array()
 	for i in range(points):
-		var a := TAU * float(i) / float(points)
+		var a: float = TAU * float(i) / float(points)
 		arr.append(Vector2(cos(a), sin(a)) * radius)
 	return arr
 
@@ -58,8 +58,8 @@ func update_godlike_aura_visuals(delta: float) -> void:
 		return
 
 	godlike_aura_time += delta
-	var count := get_equipped_godlike_count()
-	var show := count > 0
+	var count: int = get_equipped_godlike_count()
+	var show: bool = count > 0
 
 	godlike_aura.visible = show
 	godlike_orb_1.visible = show
@@ -68,24 +68,24 @@ func update_godlike_aura_visuals(delta: float) -> void:
 	if not show:
 		return
 
-	var pulse := 0.16 + abs(sin(godlike_aura_time * 3.0)) * 0.12
-	var size_boost := 1.0 + float(count) * 0.18 + abs(sin(godlike_aura_time * 2.0)) * 0.08
+	var pulse: float = 0.16 + abs(sin(godlike_aura_time * 3.0)) * 0.12
+	var size_boost: float = 1.0 + float(count) * 0.18 + abs(sin(godlike_aura_time * 2.0)) * 0.08
 	godlike_aura.scale = Vector2(size_boost, size_boost)
 	godlike_aura.color = get_godlike_aura_color()
 	godlike_aura.color.a = pulse
 
-	var orbit := 34.0 + float(count) * 8.0
+	var orbit: float = 34.0 + float(count) * 8.0
 	godlike_orb_1.position = Vector2(cos(godlike_aura_time * 2.5), sin(godlike_aura_time * 2.5)) * orbit
 	godlike_orb_2.position = Vector2(cos(godlike_aura_time * 2.5 + PI), sin(godlike_aura_time * 2.5 + PI)) * orbit
 
 func get_godlike_aura_color() -> Color:
-	var count := get_equipped_godlike_count()
+	var count: int = get_equipped_godlike_count()
 	if count >= 2:
 		return Color(1.0, 0.1, 1.0, 0.28)
 	return Color(0.75, 0.2, 1.0, 0.20)
 
 func get_equipped_godlike_count(excluding_slot: String = "") -> int:
-	var count := 0
+	var count: int = 0
 	for slot in equipment.keys():
 		if slot == excluding_slot:
 			continue
@@ -97,7 +97,7 @@ func get_equipped_godlike_count(excluding_slot: String = "") -> int:
 func can_equip_godlike_item(item: Dictionary, target_slot: String) -> bool:
 	if str(item.get("rarity", "")) != "Godlike":
 		return true
-	var current_count := get_equipped_godlike_count(target_slot)
+	var current_count: int = get_equipped_godlike_count(target_slot)
 	return current_count < MAX_GODLIKE_EQUIPPED
 
 func equip_item_to_specific_slot(index: int, slot: String) -> void:
@@ -142,7 +142,7 @@ func update_hud() -> void:
 		hud_label.text += "\nGodlike: " + str(get_equipped_godlike_count()) + "/" + str(MAX_GODLIKE_EQUIPPED)
 
 func item_to_text(item: Dictionary) -> String:
-	var text := super.item_to_text(item)
+	var text: String = super.item_to_text(item)
 	if str(item.get("rarity", "")) == "Godlike":
 		text += "GODLIKE POWER: Counts toward the " + str(MAX_GODLIKE_EQUIPPED) + " item Godlike limit.\n"
 	return text
