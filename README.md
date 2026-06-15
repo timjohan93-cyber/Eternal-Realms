@@ -4,7 +4,7 @@ Godot ARPG prototype inspired by Diablo, Path of Exile and Last Epoch-style prog
 
 ## Current working version
 
-**V7.3.0 Skill Icons + Action Bar Visual Foundation**
+**V7.4.0 Passive Tree Visual Foundation**
 
 Current systems:
 - Loot drops with rarity
@@ -19,16 +19,14 @@ Current systems:
 - Free assignment to RMB / 1 / 2 / 3 / 4 / 5
 - Godlike equipment limit: max 2 equipped
 - Godlike aura visuals
-- First visual action bar with skill icons
-- Skill icon mapping foundation
+- First visual action bar with text-based skill icons
+- Passive Tree visual foundation with clickable nodes
 
-## V7.3 controls
+## V7.4 controls
 
-Current gameplay input is still inherited from the stable V7.2/V6.9 base.
+Open Character Screen with `K`.
 
-Open Character Screen with `K`, then go to the Skills tab.
-
-Skill Book controls:
+Skills tab:
 - `F1-F8` select skill
 - `+` rank up selected skill
 - `-` refund selected skill rank
@@ -39,10 +37,14 @@ Skill Book controls:
 - `B` assign selected skill to 4
 - `N` assign selected skill to 5
 
+Passives tab:
+- Left click passive node to upgrade
+- Shift + click passive node to refund
+
 Next UI goal:
-- Move to the preferred Eternal Realms layout: LMB / RMB / Q / W / E / R.
-- Replace emoji placeholders with proper generated skill icons.
-- Add hover tooltips and cooldown overlays.
+- Move to preferred Eternal Realms layout: LMB / RMB / Q / W / E / R.
+- Replace text placeholders with proper PNG skill icons.
+- Add cooldown overlays and better hover tooltips.
 
 ## Development workflow
 
