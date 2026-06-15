@@ -1,8 +1,7 @@
 extends "res://scripts/MainV74.gd"
 
-# Eternal Realms V7.5.0
-# Keybind Options Menu Foundation
-# Adds an Options/Keybinds panel and a safe ARPG default preset.
+# Eternal Realms V7.5.1
+# Keybind Options Menu Foundation + safer gameplay keybind cleanup.
 
 var keybind_panel: Panel
 var keybind_label: Label
@@ -26,8 +25,16 @@ func _ready() -> void:
 	update_hud()
 	update_v73_action_bar()
 
+func is_gameplay_keybind_context() -> bool:
+	if keybind_panel != null and keybind_panel.visible:
+		return false
+	if inventory_open or character_open or merchant_open or blacksmith_open or mystic_open or dev_open:
+		return false
+	if game_menu_open:
+		return false
+	return true
+
 func apply_v75_default_action_bar() -> void:
-	# Keep old assignments but expose them through the preferred ARPG layout.
 	if not combat_skill_slots.has("Q"):
 		combat_skill_slots["Q"] = int(combat_skill_slots.get("1", 0))
 	if not combat_skill_slots.has("W"):
@@ -116,14 +123,14 @@ func update_v75_keybind_panel() -> void:
 		return
 	var text := "Current Eternal Realms keybind preset:\n\n"
 	text += "LMB = Move / Interact / Basic Attack\n"
-	text += "RMB = " + str(keybinds["RMB Skill"]) + " Main Skill\n"
+	text += "RMB = Main Skill\n"
 	text += "Q = Skill 1\n"
 	text += "W = Skill 2\n"
 	text += "E = Skill 3\n"
 	text += "R = Ultimate / Skill 4\n"
 	text += "1 = Health Potion\n"
 	text += "2 = Mana Potion\n\n"
-	text += "This is the first safe keybind menu.\nNext version: click an action, then press any key to rebind it."
+	text += "F10 opens this panel.\nGameplay keybinds only fire when no UI window is open."
 	keybind_label.text = text
 
 func toggle_v75_keybind_options() -> void:
@@ -136,40 +143,39 @@ func toggle_v75_keybind_options() -> void:
 
 func handle_input() -> void:
 	if keybind_panel != null and keybind_panel.visible:
-		if key_just_pressed(KEY_ESCAPE):
+		if key_just_pressed(KEY_ESCAPE) or key_just_pressed(KEY_F10):
 			keybind_panel.visible = false
 			return
-		# Panel buttons handle mouse themselves; block gameplay input behind the panel.
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			if get_panel_rect_global(keybind_panel).has_point(get_viewport().get_mouse_position()):
 				return
 
-	# F10 opens keybind options for now.
 	if key_just_pressed(KEY_F10):
 		toggle_v75_keybind_options()
 		return
 
-	# Potion keys are moved away from Q/E so QWER can become skill keys.
-	if key_just_pressed(KEY_1):
-		use_health_potion()
-		return
-	if key_just_pressed(KEY_2):
-		use_mana_potion()
-		return
-
-	# New ARPG skill keys.
-	if key_just_pressed(KEY_Q):
-		use_combat_slot("Q")
-		return
-	if key_just_pressed(KEY_W):
-		use_combat_slot("W")
-		return
-	if key_just_pressed(KEY_E):
-		use_combat_slot("E")
-		return
-	if key_just_pressed(KEY_R):
-		use_combat_slot("R")
-		return
+	if is_gameplay_keybind_context():
+		if key_just_pressed(KEY_1):
+			use_health_potion()
+			return
+		if key_just_pressed(KEY_2):
+			use_mana_potion()
+			return
+		if key_just_pressed(KEY_3) or key_just_pressed(KEY_4) or key_just_pressed(KEY_5):
+			loot_label.text = "Use Q/W/E/R for skills. Potions are 1/2."
+			return
+		if key_just_pressed(KEY_Q):
+			use_combat_slot("Q")
+			return
+		if key_just_pressed(KEY_W):
+			use_combat_slot("W")
+			return
+		if key_just_pressed(KEY_E):
+			use_combat_slot("E")
+			return
+		if key_just_pressed(KEY_R):
+			use_combat_slot("R")
+			return
 
 	super.handle_input()
 
