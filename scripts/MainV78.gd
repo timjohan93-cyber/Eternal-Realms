@@ -149,9 +149,10 @@ func update_character_ui() -> void:
 	super.update_character_ui()
 	apply_v78_reference_layout()
 	apply_v78_tab_visibility()
+	update_v78_focused_passives()
 	update_v78_paragon_board()
 	if character_preview_label != null:
-		character_preview_label.text = current_class + " Equipment"
+		character_preview_label.text = current_class + " " + character_tab
 	if v78_equipment_hint != null:
 		v78_equipment_hint.text = "Select inventory item, then click an equipment slot. Click equipped slot with no selected item to unequip."
 
@@ -265,3 +266,34 @@ func update_v78_paragon_board() -> void:
 		btn.disabled = not unlocked
 		btn.modulate = Color(1.0, 0.82, 0.35, 1.0) if unlocked else Color(0.45, 0.45, 0.45, 1.0)
 		btn.text = key + ("\nUnlocked" if unlocked else "\nLocked")
+
+func update_v78_focused_passives() -> void:
+	if not (character_open and character_tab == "Passives"):
+		return
+
+	var node_to_rank := {
+		"Damage": "Damage Training",
+		"Crit Chance": "Crit Training",
+		"Crit Damage": "Crit Training",
+		"Health": "Armor Training",
+		"Armor": "Armor Training",
+		"Regen": "Cooldown Training",
+		"Move Speed": "Movement Training",
+		"Gold Find": "Movement Training",
+		"Magic Find": "Cooldown Training"
+	}
+
+	for key in v77a_passive_nodes.keys():
+		var node = v77a_passive_nodes[key]
+		if not is_instance_valid(node):
+			continue
+		if str(key).ends_with("_header"):
+			node.visible = true
+			continue
+		if node is Button:
+			var btn: Button = node
+			var rank_key: String = str(node_to_rank.get(key, ""))
+			var rank := int(passive_ranks.get(rank_key, 0)) if rank_key != "" else 0
+			btn.text = str(key) + "\nRank " + str(rank) + "/10"
+			btn.tooltip_text = "Mapped to " + rank_key if rank_key != "" else "Passive preview node"
+			btn.modulate = Color(1.0, 0.88, 0.45, 1.0) if rank > 0 else Color(0.72, 0.72, 0.72, 1.0)
