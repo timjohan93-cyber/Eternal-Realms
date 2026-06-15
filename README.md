@@ -4,7 +4,7 @@ Godot ARPG prototype inspired by Diablo, Path of Exile and Last Epoch-style prog
 
 ## Current working version
 
-**V7.1 Equipment Identity Update**
+**V7.3.0 Skill Icons + Action Bar Visual Foundation**
 
 Current systems:
 - Loot drops with rarity
@@ -19,10 +19,12 @@ Current systems:
 - Free assignment to RMB / 1 / 2 / 3 / 4 / 5
 - Godlike equipment limit: max 2 equipped
 - Godlike aura visuals
-- Rogue dual wield foundation
-- Weapon type / offhand type foundation
+- First visual action bar with skill icons
+- Skill icon mapping foundation
 
-## V7.1 controls
+## V7.3 controls
+
+Current gameplay input is still inherited from the stable V7.2/V6.9 base.
 
 Open Character Screen with `K`, then go to the Skills tab.
 
@@ -37,11 +39,10 @@ Skill Book controls:
 - `B` assign selected skill to 4
 - `N` assign selected skill to 5
 
-Equipment rules:
-- Only 2 Godlike items can be equipped at once.
-- Godlike items create a visible aura around the player.
-- Rogue can equip a one-handed weapon in the offhand slot for dual wield.
-- Rogue dual wield gives +15% attack speed and +10% crit chance.
+Next UI goal:
+- Move to the preferred Eternal Realms layout: LMB / RMB / Q / W / E / R.
+- Replace emoji placeholders with proper generated skill icons.
+- Add hover tooltips and cooldown overlays.
 
 ## Development workflow
 
