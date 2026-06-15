@@ -1,6 +1,6 @@
 extends "res://scripts/MainV72.gd"
 
-# Eternal Realms V7.3.0
+# Eternal Realms V7.3.1
 # Skill Icons + Action Bar Visual Foundation
 # Stable visual-only step. Gameplay input remains inherited from V7.2 for now.
 
@@ -52,16 +52,16 @@ func update_v73_action_bar() -> void:
 	if action_bar_panel == null or not is_instance_valid(action_bar_panel):
 		return
 
-	set_action_slot_text("LMB", "👣\nMove")
+	set_action_slot_text("LMB", "M\nMove")
 
 	var slots = ["RMB", "1", "2", "3", "4", "5"]
 	for slot_name in slots:
-		var skill_index = get_combat_slot_skill_index(slot_name)
+		var skill_index: int = get_combat_slot_skill_index(slot_name)
 		var skill = get_skill(skill_index)
-		var rank = get_skill_rank(skill_index)
-		var icon = get_skill_icon(skill["name"])
-		var short_name = str(skill["name"]).substr(0, 8)
-		var rank_text = "R" + str(rank)
+		var rank: int = get_skill_rank(skill_index)
+		var icon: String = get_skill_icon(str(skill["name"]))
+		var short_name: String = str(skill["name"]).substr(0, 8)
+		var rank_text: String = "R" + str(rank)
 		if rank <= 0:
 			rank_text = "LOCK"
 		set_action_slot_text(slot_name, icon + "\n" + short_name + "\n" + rank_text)
@@ -76,9 +76,9 @@ func set_action_slot_text(slot_name: String, text: String) -> void:
 func get_action_slot_tooltip(slot_name: String) -> String:
 	if slot_name == "LMB":
 		return "Left Mouse Button\nMove / Interact / Basic Attack"
-	var skill_index = get_combat_slot_skill_index(slot_name)
+	var skill_index: int = get_combat_slot_skill_index(slot_name)
 	var skill = get_skill(skill_index)
-	var text := slot_name + " - " + skill["name"] + "\n"
+	var text: String = slot_name + " - " + str(skill["name"]) + "\n"
 	text += "Category: " + str(skill.get("category", "Skill")) + "\n"
 	text += "Mana: " + str(get_skill_cost(skill_index)) + "\n"
 	text += "Cooldown: " + str(get_skill_cooldown(skill_index)) + "s\n"
@@ -88,70 +88,70 @@ func get_action_slot_tooltip(slot_name: String) -> String:
 func get_skill_icon(skill_name: String) -> String:
 	match skill_name:
 		"Cleave":
-			return "⚔️"
+			return "SW"
 		"Charge":
-			return "🐗"
+			return "CH"
 		"Ground Slam":
-			return "🔨"
+			return "GS"
 		"Ragnarok":
-			return "💥"
+			return "RG"
 		"Whirlwind":
-			return "🌀"
+			return "WW"
 		"Leap":
-			return "🦶"
+			return "LP"
 		"War Cry":
-			return "📣"
+			return "WC"
 		"Execute":
-			return "🩸"
+			return "EX"
 		"Poison Arrow":
-			return "🏹"
+			return "PA"
 		"Dash":
-			return "💨"
+			return "DS"
 		"Fan of Knives":
-			return "🗡️"
+			return "FK"
 		"Endless Barrage":
-			return "🎯"
+			return "EB"
 		"Quick Shot":
-			return "➹"
+			return "QS"
 		"Shadow Step":
-			return "🌑"
+			return "SS"
 		"Rain of Arrows":
-			return "☔"
+			return "RA"
 		"Smoke Bomb":
-			return "☁️"
+			return "SB"
 		"Smite":
-			return "🔆"
+			return "SM"
 		"Heal":
-			return "✨"
+			return "HL"
 		"Consecration":
-			return "☀️"
+			return "CO"
 		"Final Judgment":
-			return "⚖️"
+			return "FJ"
 		"Holy Shield":
-			return "🛡️"
+			return "HS"
 		"Blessed Hammer":
-			return "🔱"
+			return "BH"
 		"Judgement":
-			return "⚡"
+			return "JD"
 		"Radiant Charge":
-			return "🌟"
+			return "RC"
 		"Fireball":
-			return "🔥"
+			return "FB"
 		"Teleport":
-			return "🌀"
+			return "TP"
 		"Ice Nova":
-			return "❄️"
+			return "IN"
 		"Apocalypse":
-			return "☄️"
+			return "AP"
 		"Lightning Bolt":
-			return "⚡"
+			return "LB"
 		"Meteor":
-			return "☄️"
+			return "MT"
 		"Arcane Nova":
-			return "🔮"
+			return "AN"
 		"Mana Surge":
-			return "💧"
-	return "◆"
+			return "MS"
+	return "SK"
 
 func update_potion_belt_ui() -> void:
 	# V7.3 uses the new visual action bar. Keep the old potion belt compact.
