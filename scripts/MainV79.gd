@@ -2,8 +2,6 @@ extends "res://scripts/MainV78H.gd"
 
 # Eternal Realms V7.9
 # Main Menu + Class Select Foundation
-# Adds a pre-game menu inspired by the Eternal Realms visual target.
-# This is code/UI only for now: cinematic art/models can be swapped in later as real assets.
 
 var main_menu_panel: Panel
 var main_menu_title: Label
@@ -20,41 +18,11 @@ var menu_fire: Polygon2D
 var menu_hero_markers := {}
 
 var menu_classes := {
-	"Warrior": {
-		"role": "MELEE • DURABLE",
-		"desc": "Close range fighter with high survivability.",
-		"color": Color(0.95, 0.20, 0.14, 1.0),
-		"icon": "⚔",
-		"gear": "Sword • Shield • Heavy Armor"
-	},
-	"Rogue": {
-		"role": "MELEE • AGILE",
-		"desc": "Fast strikes, critical hits and evasion.",
-		"color": Color(0.20, 0.90, 0.38, 1.0),
-		"icon": "🗡",
-		"gear": "Daggers • Bow • Leather Armor"
-	},
-	"Paladin": {
-		"role": "MELEE • SUPPORT",
-		"desc": "Holy warrior with powerful aura and healing.",
-		"color": Color(1.0, 0.78, 0.22, 1.0),
-		"icon": "🛡",
-		"gear": "Mace • Shield • Plate Armor"
-	},
-	"Mage": {
-		"role": "RANGED • SPELLCASTER",
-		"desc": "Master of the elements and arcane powers.",
-		"color": Color(0.72, 0.25, 1.0, 1.0),
-		"icon": "✦",
-		"gear": "Staff • Orb • Mystic Robes"
-	},
-	"Ranger": {
-		"role": "RANGED • PRECISION",
-		"desc": "Long range attacks and nature's companion. Coming later.",
-		"color": Color(0.35, 0.85, 0.30, 1.0),
-		"icon": "◈",
-		"gear": "Bow • Quiver • Hide Armor"
-	}
+	"Warrior": {"role": "MELEE • DURABLE", "desc": "Close range fighter with high survivability.", "color": Color(0.95, 0.20, 0.14, 1.0), "icon": "⚔", "gear": "Sword • Shield • Heavy Armor"},
+	"Rogue": {"role": "MELEE • AGILE", "desc": "Fast strikes, critical hits and evasion.", "color": Color(0.20, 0.90, 0.38, 1.0), "icon": "🗡", "gear": "Daggers • Bow • Leather Armor"},
+	"Paladin": {"role": "MELEE • SUPPORT", "desc": "Holy warrior with powerful aura and healing.", "color": Color(1.0, 0.78, 0.22, 1.0), "icon": "🛡", "gear": "Mace • Shield • Plate Armor"},
+	"Mage": {"role": "RANGED • SPELLCASTER", "desc": "Master of the elements and arcane powers.", "color": Color(0.72, 0.25, 1.0, 1.0), "icon": "✦", "gear": "Staff • Orb • Mystic Robes"},
+	"Ranger": {"role": "RANGED • PRECISION", "desc": "Long range attacks and nature's companion. Coming later.", "color": Color(0.35, 0.85, 0.30, 1.0), "icon": "◈", "gear": "Bow • Quiver • Hide Armor"}
 }
 
 func _ready() -> void:
@@ -71,16 +39,14 @@ func create_v79_main_menu() -> void:
 		return
 	if main_menu_panel != null and is_instance_valid(main_menu_panel):
 		return
-
 	main_menu_panel = Panel.new()
 	main_menu_panel.name = "V79MainMenu"
-	main_menu_panel.position = Vector2(0, 0)
+	main_menu_panel.position = Vector2.ZERO
 	main_menu_panel.size = Vector2(2560, 1440)
 	main_menu_panel.z_index = 1000
 	main_menu_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	main_menu_panel.add_theme_stylebox_override("panel", make_v78a_panel_style(Color(0.006, 0.008, 0.011, 0.995), Color(0.28, 0.20, 0.12, 1.0), 0))
 	hud.add_child(main_menu_panel)
-
 	create_v79_menu_background()
 	create_v79_left_menu()
 	create_v79_class_select()
@@ -88,19 +54,17 @@ func create_v79_main_menu() -> void:
 
 func create_v79_menu_background() -> void:
 	var sky := ColorRect.new()
-	sky.position = Vector2(0, 0)
+	sky.position = Vector2.ZERO
 	sky.size = Vector2(2560, 1440)
 	sky.color = Color(0.006, 0.009, 0.014, 1.0)
 	sky.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	main_menu_panel.add_child(sky)
-
 	var fog := ColorRect.new()
 	fog.position = Vector2(0, 620)
 	fog.size = Vector2(2560, 820)
 	fog.color = Color(0.04, 0.035, 0.030, 0.78)
 	fog.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	main_menu_panel.add_child(fog)
-
 	for i in range(9):
 		var tower := ColorRect.new()
 		tower.position = Vector2(160 + i * 280, 240 + (i % 3) * 45)
@@ -108,20 +72,17 @@ func create_v79_menu_background() -> void:
 		tower.color = Color(0.018, 0.021, 0.026, 0.72)
 		tower.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		main_menu_panel.add_child(tower)
-
 	var ground := ColorRect.new()
 	ground.position = Vector2(0, 960)
 	ground.size = Vector2(2560, 480)
 	ground.color = Color(0.018, 0.014, 0.010, 1.0)
 	ground.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	main_menu_panel.add_child(ground)
-
 	menu_fire = Polygon2D.new()
 	menu_fire.position = Vector2(1280, 940)
 	menu_fire.polygon = PackedVector2Array([Vector2(-42, 55), Vector2(-18, -45), Vector2(0, -85), Vector2(18, -35), Vector2(42, 55)])
 	menu_fire.color = Color(1.0, 0.38, 0.05, 0.95)
 	main_menu_panel.add_child(menu_fire)
-
 	var ember := Polygon2D.new()
 	ember.position = Vector2(1280, 990)
 	ember.polygon = make_circle_polygon(82.0, 36)
@@ -137,7 +98,6 @@ func create_v79_left_menu() -> void:
 	main_menu_title.add_theme_color_override("font_color", Color(1.0, 0.78, 0.42, 1.0))
 	main_menu_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	main_menu_panel.add_child(main_menu_title)
-
 	main_menu_subtitle = Label.new()
 	main_menu_subtitle.position = Vector2(75, 295)
 	main_menu_subtitle.size = Vector2(470, 32)
@@ -146,14 +106,12 @@ func create_v79_left_menu() -> void:
 	main_menu_subtitle.add_theme_color_override("font_color", Color(0.78, 0.66, 0.44, 1.0))
 	main_menu_subtitle.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	main_menu_panel.add_child(main_menu_subtitle)
-
 	var buttons := [
 		{"name": "PLAY", "callback": Callable(self, "show_v79_class_select")},
 		{"name": "SETTINGS", "callback": Callable(self, "show_v79_settings_placeholder")},
 		{"name": "CREDITS", "callback": Callable(self, "show_v79_credits_placeholder")},
 		{"name": "EXIT GAME", "callback": Callable(self, "quit_v79_game")}
 	]
-
 	for i in range(buttons.size()):
 		var data: Dictionary = buttons[i]
 		var btn := Button.new()
@@ -174,9 +132,8 @@ func create_v79_class_select() -> void:
 	class_select_panel.position = Vector2(540, 95)
 	class_select_panel.size = Vector2(1820, 1180)
 	class_select_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	class_select_panel.add_theme_stylebox_override("panel", make_v78a_panel_style(Color(0.0, 0.0, 0.0, 0.0), Color(0.0, 0.0, 0.0, 0.0), 0))
+	class_select_panel.add_theme_stylebox_override("panel", make_v78a_panel_style(Color(0, 0, 0, 0), Color(0, 0, 0, 0), 0))
 	main_menu_panel.add_child(class_select_panel)
-
 	var header := Label.new()
 	header.position = Vector2(0, 20)
 	header.size = Vector2(1820, 48)
@@ -186,14 +143,13 @@ func create_v79_class_select() -> void:
 	header.add_theme_color_override("font_color", Color(1.0, 0.84, 0.55, 1.0))
 	header.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	class_select_panel.add_child(header)
-
 	var class_order := ["Warrior", "Rogue", "Paladin", "Mage", "Ranger"]
 	for i in range(class_order.size()):
 		var class_id := str(class_order[i])
 		create_v79_class_card(class_id, Vector2(50 + i * 350, 660), i)
 		create_v79_hero_marker(class_id, Vector2(145 + i * 350, 320), i)
 
-func create_v79_hero_marker(class_id: String, pos: Vector2, index: int) -> void:
+func create_v79_hero_marker(class_id: String, pos: Vector2, _index: int) -> void:
 	var data: Dictionary = menu_classes[class_id]
 	var color: Color = data["color"]
 	var hero := Button.new()
@@ -210,7 +166,7 @@ func create_v79_hero_marker(class_id: String, pos: Vector2, index: int) -> void:
 	class_select_panel.add_child(hero)
 	menu_hero_markers[class_id] = hero
 
-func create_v79_class_card(class_id: String, pos: Vector2, index: int) -> void:
+func create_v79_class_card(class_id: String, pos: Vector2, _index: int) -> void:
 	var data: Dictionary = menu_classes[class_id]
 	var color: Color = data["color"]
 	var btn := Button.new()
@@ -236,7 +192,6 @@ func create_v79_dev_notice() -> void:
 	main_menu_notice.add_theme_color_override("font_color", Color(0.82, 0.72, 0.62, 1.0))
 	main_menu_notice.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	main_menu_panel.add_child(main_menu_notice)
-
 	main_menu_dev_checkbox = CheckBox.new()
 	main_menu_dev_checkbox.position = Vector2(1990, 1225)
 	main_menu_dev_checkbox.size = Vector2(470, 70)
@@ -246,7 +201,6 @@ func create_v79_dev_notice() -> void:
 	main_menu_dev_checkbox.add_theme_color_override("font_color", Color(0.72, 0.68, 0.60, 1.0))
 	main_menu_dev_checkbox.toggled.connect(func(enabled: bool): development_mode_enabled = enabled)
 	main_menu_panel.add_child(main_menu_dev_checkbox)
-
 	var version := Label.new()
 	version.position = Vector2(55, 1325)
 	version.size = Vector2(220, 32)
@@ -264,14 +218,12 @@ func show_v79_main_menu() -> void:
 	set_v79_gameplay_visible(false)
 
 func show_v79_class_select() -> void:
-	# Play currently means confirm selected class and enter world.
 	start_v79_game()
 
 func start_v79_game() -> void:
 	if selected_menu_class == "Ranger":
 		loot_label.text = "Ranger is a future class. Starting as Rogue for now."
 		selected_menu_class = "Rogue"
-
 	current_class = selected_menu_class
 	apply_class_base_stats()
 	recalculate_stats()
@@ -286,20 +238,17 @@ func start_v79_game() -> void:
 	set_v79_gameplay_visible(true)
 	loot_label.text = "Welcome to Eternal Realms, " + current_class + "."
 
-func set_v79_gameplay_visible(show: bool) -> void:
-	# Keep the world itself rendered behind the menu, but hide core gameplay UI until Play.
+func set_v79_gameplay_visible(show_game_ui: bool) -> void:
 	if hud_label != null:
-		hud_label.visible = show
+		hud_label.visible = show_game_ui
 	if action_bar_panel != null:
-		action_bar_panel.visible = show
+		action_bar_panel.visible = show_game_ui
 	if inventory_panel != null:
 		inventory_panel.visible = false
 	if character_preview_panel != null:
 		character_preview_panel.visible = false
 	if passive_tree_panel != null:
 		passive_tree_panel.visible = false
-	if vendor_panel != null:
-		vendor_panel.visible = false
 	if blacksmith_panel != null:
 		blacksmith_panel.visible = false
 	if mystic_panel != null:
@@ -313,7 +262,7 @@ func select_v79_menu_class(class_id: String) -> void:
 		var btn: Button = class_card_buttons[key]
 		if btn == null or not is_instance_valid(btn):
 			continue
-		var active := key == selected_menu_class
+		var active: bool = key == selected_menu_class
 		var bg_strength := 0.18 if active else 0.05
 		var border_color: Color = color.lightened(0.28) if active else color.darkened(0.25)
 		btn.add_theme_stylebox_override("normal", make_v78a_button_style(Color(color.r * bg_strength, color.g * bg_strength, color.b * bg_strength, 0.96), border_color, 4 if active else 2))
