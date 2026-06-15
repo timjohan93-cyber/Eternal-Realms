@@ -1,0 +1,32 @@
+ETERNAL REALMS DESIGN DOC v1.10.0
+
+V7.1 EQUIPMENT IDENTITY UPDATE
+
+Implemented:
+- MainV71.gd extends MainV69.gd.
+- Main scene now uses MainV71.gd.
+- Godlike item limit: maximum 2 equipped at the same time.
+- Character HUD shows Godlike count.
+- Equipment/Build screen shows Godlike Power Slots.
+- Godlike aura visuals appear around the player when Godlike gear is equipped.
+- 1 Godlike item = aura.
+- 2 Godlike items = stronger aura + second orbiting orb.
+- Weapon type foundation added through item normalization.
+- Offhand type foundation added through item normalization.
+- Rogue dual wield foundation:
+  - Rogue can equip a one-handed weapon in the Offhand slot.
+  - Rogue dual wield gives +15% attack speed and +10% crit chance.
+
+Design intent:
+- Godlike items should be powerful and visually special, but not dominate every gear slot.
+- Limiting Godlike items to 2 creates build choices.
+- Rings and amulets can feel visually important through aura effects even if they are not visible as models.
+- Rogue dual wield creates a class identity and prepares the equipment system for future class-specific gear rules.
+
+Future:
+- Different aura colors based on Godlike item theme.
+- Godlike ring runes floating around player.
+- Godlike amulet chest glow.
+- Godlike boots movement trail.
+- Character sprites and equipment visuals.
+- Proper item icons for all weapon/offhand types.
