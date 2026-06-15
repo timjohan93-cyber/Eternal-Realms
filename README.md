@@ -4,7 +4,7 @@ Godot ARPG prototype inspired by Diablo, Path of Exile and Last Epoch-style prog
 
 ## Current working version
 
-**V6.9 Skill Book & Action Bar Overhaul**
+**V7.1 Equipment Identity Update**
 
 Current systems:
 - Loot drops with rarity
@@ -17,8 +17,12 @@ Current systems:
 - Skill Book foundation
 - 8 abilities per class foundation
 - Free assignment to RMB / 1 / 2 / 3 / 4 / 5
+- Godlike equipment limit: max 2 equipped
+- Godlike aura visuals
+- Rogue dual wield foundation
+- Weapon type / offhand type foundation
 
-## V6.9 controls
+## V7.1 controls
 
 Open Character Screen with `K`, then go to the Skills tab.
 
@@ -32,6 +36,12 @@ Skill Book controls:
 - `V` assign selected skill to 3
 - `B` assign selected skill to 4
 - `N` assign selected skill to 5
+
+Equipment rules:
+- Only 2 Godlike items can be equipped at once.
+- Godlike items create a visible aura around the player.
+- Rogue can equip a one-handed weapon in the offhand slot for dual wield.
+- Rogue dual wield gives +15% attack speed and +10% crit chance.
 
 ## Development workflow
 
