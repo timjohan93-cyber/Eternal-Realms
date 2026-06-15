@@ -98,7 +98,7 @@ func apply_v78a_slot_styles() -> void:
 		if item != null:
 			rarity = str(item.get("rarity", "Common"))
 		var border := get_v78a_rarity_frame_color(rarity)
-		var bg := Color(0.045, 0.045, 0.052, 0.96) if item == null else Color(0.075, 0.06, 0.055, 0.96)
+		var bg: Color = Color(0.045, 0.045, 0.052, 0.96) if item == null else Color(0.075, 0.06, 0.055, 0.96)
 		btn.add_theme_stylebox_override("normal", make_v78a_button_style(bg, border, 2))
 		btn.add_theme_stylebox_override("hover", make_v78a_button_style(Color(0.10, 0.082, 0.065, 0.98), border.lightened(0.18), 2))
 		btn.add_theme_stylebox_override("pressed", make_v78a_button_style(Color(0.14, 0.095, 0.06, 1.0), border.lightened(0.28), 2))
@@ -122,9 +122,9 @@ func apply_v78a_paragon_styles() -> void:
 		var btn: Button = v78_paragon_nodes[key]
 		if btn == null or not is_instance_valid(btn):
 			continue
-		var unlocked := not btn.disabled
-		var border := Color(0.95, 0.68, 0.22, 1.0) if unlocked else Color(0.36, 0.34, 0.32, 0.9)
-		var bg := Color(0.11, 0.075, 0.04, 0.98) if unlocked else Color(0.045, 0.045, 0.05, 0.92)
+		var unlocked: bool = not btn.disabled
+		var border: Color = Color(0.95, 0.68, 0.22, 1.0) if unlocked else Color(0.36, 0.34, 0.32, 0.9)
+		var bg: Color = Color(0.11, 0.075, 0.04, 0.98) if unlocked else Color(0.045, 0.045, 0.05, 0.92)
 		btn.add_theme_stylebox_override("normal", make_v78a_button_style(bg, border, 2))
 		btn.add_theme_stylebox_override("hover", make_v78a_button_style(Color(0.16, 0.10, 0.04, 0.98), border.lightened(0.18), 2))
 		btn.add_theme_color_override("font_color", Color(0.95, 0.82, 0.52, 1.0) if unlocked else Color(0.52, 0.50, 0.48, 1.0))
