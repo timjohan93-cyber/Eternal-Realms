@@ -1,7 +1,7 @@
 extends "res://scripts/MainV73.gd"
 
-# Eternal Realms V7.4.0
-# Passive Tree Visual Foundation + safer UI cleanup.
+# Eternal Realms V7.4.1
+# Passive Tree Visual Foundation + UI click blocking fix.
 # Stable UI-only step on top of V7.3.
 
 var passive_tree_panel: Panel
@@ -30,6 +30,8 @@ func create_v74_passive_tree_ui() -> void:
 	passive_tree_panel.position = Vector2(620, 210)
 	passive_tree_panel.size = Vector2(900, 620)
 	passive_tree_panel.visible = false
+	passive_tree_panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	passive_tree_panel.z_index = 100
 	hud.add_child(passive_tree_panel)
 
 	var title := Label.new()
@@ -37,6 +39,7 @@ func create_v74_passive_tree_ui() -> void:
 	title.size = Vector2(840, 28)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.text = "PASSIVE TREE"
+	title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	title.add_theme_font_size_override("font_size", 22)
 	passive_tree_panel.add_child(title)
 
@@ -50,6 +53,7 @@ func add_passive_column(title_text: String, origin: Vector2, names: Array) -> vo
 	header.size = Vector2(180, 30)
 	header.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	header.text = title_text
+	header.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	header.add_theme_font_size_override("font_size", 18)
 	passive_tree_panel.add_child(header)
 
@@ -59,6 +63,7 @@ func add_passive_column(title_text: String, origin: Vector2, names: Array) -> vo
 		btn.position = origin + Vector2(0, 60 + i * 145)
 		btn.size = Vector2(180, 82)
 		btn.focus_mode = Control.FOCUS_NONE
+		btn.mouse_filter = Control.MOUSE_FILTER_STOP
 		btn.pressed.connect(func(): on_passive_node_clicked(node_name))
 		passive_tree_panel.add_child(btn)
 		passive_buttons[node_name] = btn
@@ -69,6 +74,7 @@ func add_passive_column(title_text: String, origin: Vector2, names: Array) -> vo
 			connector.position = origin + Vector2(86, 142 + i * 145)
 			connector.size = Vector2(8, 58)
 			connector.color = Color(0.45, 0.38, 0.22, 0.85)
+			connector.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			passive_tree_panel.add_child(connector)
 
 func on_passive_node_clicked(node_name: String) -> void:
@@ -112,6 +118,8 @@ func update_v74_passive_tree_ui() -> void:
 	if passive_tree_panel == null or not is_instance_valid(passive_tree_panel):
 		return
 	passive_tree_panel.visible = character_open and character_tab == "Passives"
+	if passive_tree_panel.visible:
+		passive_tree_panel.move_to_front()
 
 	for node_name in passive_button_order:
 		if not passive_buttons.has(node_name):
@@ -125,6 +133,16 @@ func update_v74_passive_tree_ui() -> void:
 			btn.modulate = Color(1.0, 0.95, 0.75, 1.0)
 		else:
 			btn.modulate = Color(0.75, 0.75, 0.75, 1.0)
+
+func get_panel_rect_global(panel: Control) -> Rect2:
+	if panel == null:
+		return Rect2()
+	return Rect2(panel.global_position, panel.size)
+
+func is_mouse_over_open_ui(mouse_pos: Vector2) -> bool:
+	if passive_tree_panel != null and passive_tree_panel.visible and get_panel_rect_global(passive_tree_panel).has_point(mouse_pos):
+		return true
+	return super.is_mouse_over_open_ui(mouse_pos)
 
 func get_passive_icon(node_name: String) -> String:
 	match node_name:
@@ -150,7 +168,7 @@ func get_passive_icon(node_name: String) -> String:
 
 func get_passive_tooltip(node_name: String) -> String:
 	var rank: int = int(passive_ranks.get(node_name, 0))
-	var text := node_name + "\nRank: " + str(rank) + "/10\n"
+	var text: String = node_name + "\nRank: " + str(rank) + "/10\n"
 	match node_name:
 		"Damage":
 			text += "Increases damage."
