@@ -189,44 +189,43 @@ func create_v79_class_select() -> void:
 
 	var class_order := ["Warrior", "Rogue", "Paladin", "Mage", "Ranger"]
 	for i in range(class_order.size()):
-		var class_name := str(class_order[i])
-		create_v79_class_card(class_name, Vector2(50 + i * 350, 660), i)
-		create_v79_hero_marker(class_name, Vector2(145 + i * 350, 320), i)
+		var class_id := str(class_order[i])
+		create_v79_class_card(class_id, Vector2(50 + i * 350, 660), i)
+		create_v79_hero_marker(class_id, Vector2(145 + i * 350, 320), i)
 
-func create_v79_hero_marker(class_name: String, pos: Vector2, index: int) -> void:
-	var data: Dictionary = menu_classes[class_name]
+func create_v79_hero_marker(class_id: String, pos: Vector2, index: int) -> void:
+	var data: Dictionary = menu_classes[class_id]
 	var color: Color = data["color"]
 	var hero := Button.new()
-	hero.name = "Hero" + class_name
+	hero.name = "Hero" + class_id
 	hero.position = pos
 	hero.size = Vector2(190, 320)
 	hero.focus_mode = Control.FOCUS_NONE
-	hero.text = str(data["icon"]) + "\n\n" + class_name.to_upper()
+	hero.text = str(data["icon"]) + "\n\n" + class_id.to_upper()
 	hero.add_theme_font_size_override("font_size", 28)
 	hero.add_theme_stylebox_override("normal", make_v78a_button_style(Color(color.r * 0.08, color.g * 0.08, color.b * 0.08, 0.35), color.darkened(0.20), 2))
 	hero.add_theme_stylebox_override("hover", make_v78a_button_style(Color(color.r * 0.16, color.g * 0.16, color.b * 0.16, 0.55), color.lightened(0.25), 3))
 	hero.add_theme_color_override("font_color", color.lightened(0.25))
-	hero.pressed.connect(func(): select_v79_menu_class(class_name))
+	hero.pressed.connect(func(): select_v79_menu_class(class_id))
 	class_select_panel.add_child(hero)
-	menu_hero_markers[class_name] = hero
+	menu_hero_markers[class_id] = hero
 
-func create_v79_class_card(class_name: String, pos: Vector2, index: int) -> void:
-	var data: Dictionary = menu_classes[class_name]
+func create_v79_class_card(class_id: String, pos: Vector2, index: int) -> void:
+	var data: Dictionary = menu_classes[class_id]
 	var color: Color = data["color"]
 	var btn := Button.new()
-	btn.name = "ClassCard" + class_name
+	btn.name = "ClassCard" + class_id
 	btn.position = pos
 	btn.size = Vector2(300, 250)
 	btn.focus_mode = Control.FOCUS_NONE
-	btn.text = str(data["icon"]) + "\n" + class_name.to_upper() + "\n" + str(data["role"]) + "\n\n" + str(data["desc"]) + "\n\n" + str(data["gear"])
-	btn.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	btn.text = str(data["icon"]) + "\n" + class_id.to_upper() + "\n" + str(data["role"]) + "\n\n" + str(data["desc"]) + "\n\n" + str(data["gear"])
 	btn.add_theme_font_size_override("font_size", 16)
 	btn.add_theme_stylebox_override("normal", make_v78a_button_style(Color(0.022, 0.020, 0.018, 0.84), color.darkened(0.25), 2))
 	btn.add_theme_stylebox_override("hover", make_v78a_button_style(Color(color.r * 0.13, color.g * 0.13, color.b * 0.13, 0.96), color.lightened(0.22), 3))
 	btn.add_theme_color_override("font_color", color.lightened(0.25))
-	btn.pressed.connect(func(): select_v79_menu_class(class_name))
+	btn.pressed.connect(func(): select_v79_menu_class(class_id))
 	class_select_panel.add_child(btn)
-	class_card_buttons[class_name] = btn
+	class_card_buttons[class_id] = btn
 
 func create_v79_dev_notice() -> void:
 	main_menu_notice = Label.new()
@@ -306,8 +305,8 @@ func set_v79_gameplay_visible(show: bool) -> void:
 	if mystic_panel != null:
 		mystic_panel.visible = false
 
-func select_v79_menu_class(class_name: String) -> void:
-	selected_menu_class = class_name
+func select_v79_menu_class(class_id: String) -> void:
+	selected_menu_class = class_id
 	for key in class_card_buttons.keys():
 		var data: Dictionary = menu_classes[key]
 		var color: Color = data["color"]
@@ -315,7 +314,9 @@ func select_v79_menu_class(class_name: String) -> void:
 		if btn == null or not is_instance_valid(btn):
 			continue
 		var active := key == selected_menu_class
-		btn.add_theme_stylebox_override("normal", make_v78a_button_style(Color(color.r * (0.18 if active else 0.05), color.g * (0.18 if active else 0.05), color.b * (0.18 if active else 0.05), 0.96), color.lightened(0.28) if active else color.darkened(0.25), 4 if active else 2))
+		var bg_strength := 0.18 if active else 0.05
+		var border_color: Color = color.lightened(0.28) if active else color.darkened(0.25)
+		btn.add_theme_stylebox_override("normal", make_v78a_button_style(Color(color.r * bg_strength, color.g * bg_strength, color.b * bg_strength, 0.96), border_color, 4 if active else 2))
 		btn.add_theme_color_override("font_color", Color(1.0, 0.88, 0.58, 1.0) if active else color.lightened(0.16))
 	for key in menu_hero_markers.keys():
 		var hero: Button = menu_hero_markers[key]
