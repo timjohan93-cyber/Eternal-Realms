@@ -75,12 +75,13 @@ func apply_v78a_panel_styles() -> void:
 
 func apply_v78a_tab_styles() -> void:
 	for tab in v77_tab_buttons.keys():
+		var tab_name: String = str(tab)
 		var btn: Button = v77_tab_buttons[tab]
 		if btn == null or not is_instance_valid(btn):
 			continue
-		var active := tab == character_tab
-		var normal_bg := Color(0.17, 0.13, 0.085, 0.96) if active else Color(0.07, 0.065, 0.06, 0.94)
-		var normal_border := Color(1.0, 0.70, 0.25, 1.0) if active else Color(0.45, 0.34, 0.18, 0.88)
+		var active: bool = tab_name == character_tab
+		var normal_bg: Color = Color(0.17, 0.13, 0.085, 0.96) if active else Color(0.07, 0.065, 0.06, 0.94)
+		var normal_border: Color = Color(1.0, 0.70, 0.25, 1.0) if active else Color(0.45, 0.34, 0.18, 0.88)
 		btn.add_theme_stylebox_override("normal", make_v78a_button_style(normal_bg, normal_border, 2))
 		btn.add_theme_stylebox_override("hover", make_v78a_button_style(Color(0.20, 0.15, 0.09, 0.98), Color(1.0, 0.78, 0.32, 1.0), 2))
 		btn.add_theme_stylebox_override("pressed", make_v78a_button_style(Color(0.30, 0.19, 0.08, 1.0), Color(1.0, 0.86, 0.38, 1.0), 2))
