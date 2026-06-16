@@ -6,9 +6,9 @@ extends "res://scripts/MainV80B.gd"
 # This remains polygon-only for now, but the structure prepares us for real sprites/models and gear visuals later.
 
 var v81_player_parts := {}
-var v81_walk_time := 0.0
-var v81_last_player_position := Vector2.ZERO
-var v81_last_facing := Vector2(1, 0)
+var v81_walk_time: float = 0.0
+var v81_last_player_position: Vector2 = Vector2.ZERO
+var v81_last_facing: Vector2 = Vector2(1, 0)
 
 func _ready() -> void:
 	super._ready()
@@ -22,7 +22,6 @@ func _process(delta: float) -> void:
 	update_v81_body_animation(delta)
 
 func create_v80_player_visual() -> void:
-	# Override V8.0 creation so the root exists, but the actual visual is built by V8.1 body parts.
 	if player == null:
 		return
 	if v80_player_visual_root != null and is_instance_valid(v80_player_visual_root):
@@ -38,11 +37,9 @@ func hide_v81_old_player_arrow() -> void:
 		player_shape.polygon = PackedVector2Array()
 
 func apply_v80_character_class_visual(class_id: String) -> void:
-	# Keep menu visuals from V8.0, but use the new body-part visual for gameplay.
 	v80_current_visual_class = class_id
 	create_v80_player_visual()
 	apply_v81_character_body(class_id)
-
 	for key in v80_menu_character_nodes.keys():
 		var node: Node2D = v80_menu_character_nodes[key]
 		if node == null or not is_instance_valid(node):
@@ -57,41 +54,27 @@ func apply_v81_character_body(class_id: String) -> void:
 	create_v80_player_visual()
 	if v80_player_visual_root == null or not is_instance_valid(v80_player_visual_root):
 		return
-
 	for child in v80_player_visual_root.get_children():
 		child.queue_free()
 	v81_player_parts.clear()
-
-	var colors := get_v81_class_palette(class_id)
+	var colors: Dictionary = get_v81_class_palette(class_id)
 	var body := Node2D.new()
 	body.name = "BodyRig"
 	v80_player_visual_root.add_child(body)
 	v81_player_parts["rig"] = body
-
-	# Ground shadow.
 	v81_player_parts["shadow"] = add_v81_poly(body, "Shadow", make_v81_ellipse(25, 9, 24), Color(0, 0, 0, 0.32), Vector2(0, 18), -5)
-
-	# Legs first, behind torso.
 	v81_player_parts["left_leg"] = add_v81_poly(body, "LeftLeg", PackedVector2Array([Vector2(-7, 0), Vector2(-17, 34), Vector2(-7, 38), Vector2(3, 4)]), colors["leg"], Vector2(-5, 8), 1)
 	v81_player_parts["right_leg"] = add_v81_poly(body, "RightLeg", PackedVector2Array([Vector2(7, 0), Vector2(17, 34), Vector2(7, 38), Vector2(-3, 4)]), colors["leg"], Vector2(5, 8), 1)
-
-	# Cape/back cloth for classes that use it.
 	if class_id in ["Mage", "Ranger", "Rogue", "Paladin"]:
 		v81_player_parts["cape"] = add_v81_poly(body, "Cape", PackedVector2Array([Vector2(-18, -38), Vector2(18, -38), Vector2(28, 42), Vector2(0, 58), Vector2(-28, 42)]), colors["cape"], Vector2.ZERO, 0)
-
-	# Torso, shoulders, head.
 	v81_player_parts["torso"] = add_v81_poly(body, "Torso", PackedVector2Array([Vector2(-17, -35), Vector2(17, -35), Vector2(21, 9), Vector2(10, 25), Vector2(-10, 25), Vector2(-21, 9)]), colors["torso"], Vector2.ZERO, 5)
 	v81_player_parts["chest_plate"] = add_v81_poly(body, "ChestPlate", PackedVector2Array([Vector2(-11, -28), Vector2(11, -28), Vector2(13, 6), Vector2(0, 20), Vector2(-13, 6)]), colors["accent"], Vector2.ZERO, 6)
 	v81_player_parts["left_shoulder"] = add_v81_poly(body, "LeftShoulder", make_v81_ellipse(12, 8, 14), colors["metal"], Vector2(-23, -29), 7)
 	v81_player_parts["right_shoulder"] = add_v81_poly(body, "RightShoulder", make_v81_ellipse(12, 8, 14), colors["metal"], Vector2(23, -29), 7)
 	v81_player_parts["head"] = add_v81_poly(body, "Head", make_circle_polygon(9.0, 18), colors["skin"], Vector2(0, -53), 8)
 	v81_player_parts["helmet"] = add_v81_poly(body, "Helmet", PackedVector2Array([Vector2(-13, -58), Vector2(0, -75), Vector2(13, -58), Vector2(8, -48), Vector2(-8, -48)]), colors["helmet"], Vector2.ZERO, 9)
-
-	# Arms.
 	v81_player_parts["left_arm"] = add_v81_poly(body, "LeftArm", PackedVector2Array([Vector2(-4, -4), Vector2(-31, 22), Vector2(-23, 30), Vector2(3, 4)]), colors["arm"], Vector2(-21, -22), 4)
 	v81_player_parts["right_arm"] = add_v81_poly(body, "RightArm", PackedVector2Array([Vector2(4, -4), Vector2(31, 22), Vector2(23, 30), Vector2(-3, 4)]), colors["arm"], Vector2(21, -22), 4)
-
-	# Weapons / class identity.
 	match class_id:
 		"Warrior":
 			v81_player_parts["weapon"] = add_v81_poly(body, "Sword", PackedVector2Array([Vector2(34, -62), Vector2(39, -62), Vector2(40, 28), Vector2(33, 28)]), colors["weapon"], Vector2.ZERO, 10)
@@ -110,7 +93,6 @@ func apply_v81_character_body(class_id: String) -> void:
 		"Ranger":
 			v81_player_parts["weapon"] = add_v81_poly(body, "Bow", PackedVector2Array([Vector2(38, -56), Vector2(55, -17), Vector2(38, 24), Vector2(44, 21), Vector2(62, -17), Vector2(44, -59)]), colors["weapon"], Vector2.ZERO, 10)
 			v81_player_parts["arrow"] = add_v81_poly(body, "Arrow", PackedVector2Array([Vector2(-32, -25), Vector2(45, -13), Vector2(44, -9), Vector2(-34, -21)]), colors["weapon"].lightened(0.18), Vector2.ZERO, 11)
-
 	v80_player_visual_root.scale = Vector2(0.82, 0.82)
 
 func add_v81_poly(root: Node2D, part_name: String, poly: PackedVector2Array, color: Color, pos: Vector2, z: int) -> Polygon2D:
@@ -153,26 +135,22 @@ func update_v81_body_animation(delta: float) -> void:
 		return
 	if not v81_player_parts.has("rig"):
 		return
-
-	var moved_dist := player.position.distance_to(v81_last_player_position)
-	var moving := moved_dist > 0.4
+	var moved_dist: float = player.position.distance_to(v81_last_player_position)
+	var moving: bool = moved_dist > 0.4
 	if moving:
 		v81_walk_time += delta * 8.0
-		var move_dir := v81_last_player_position.direction_to(player.position)
+		var move_dir: Vector2 = v81_last_player_position.direction_to(player.position)
 		if move_dir.length() > 0.01:
 			v81_last_facing = move_dir.normalized()
 	else:
 		v81_walk_time += delta * 2.2
-
 	var rig: Node2D = v81_player_parts["rig"]
-	var breath := sin(v81_walk_time * 1.25)
-	var step := sin(v81_walk_time)
-	var step_abs := abs(step)
-
-	rig.scale = Vector2(1.0 + breath * 0.012, 1.0 + abs(breath) * 0.018)
+	var breath: float = sin(v81_walk_time * 1.25)
+	var step: float = sin(v81_walk_time)
+	var step_abs: float = absf(step)
+	rig.scale = Vector2(1.0 + breath * 0.012, 1.0 + absf(breath) * 0.018)
 	rig.position.y = -step_abs * 2.0 if moving else breath * 1.0
 	rig.rotation = step * 0.035 if moving else sin(v81_walk_time * 0.6) * 0.012
-
 	if v81_player_parts.has("left_leg"):
 		var l: Polygon2D = v81_player_parts["left_leg"]
 		l.rotation = step * 0.22 if moving else -0.03
@@ -199,13 +177,10 @@ func update_v81_body_animation(delta: float) -> void:
 	if v81_player_parts.has("orb"):
 		var orb: Polygon2D = v81_player_parts["orb"]
 		orb.position = Vector2(43 + cos(v81_walk_time * 1.7) * 2.0, -83 + sin(v81_walk_time * 1.9) * 3.0)
-		orb.color.a = 0.78 + abs(sin(v81_walk_time * 2.0)) * 0.20
-
-	# Small left/right flip based on movement direction. This is simple but gives immediate direction feedback.
-	if abs(v81_last_facing.x) > 0.05:
+		orb.color.a = 0.78 + absf(sin(v81_walk_time * 2.0)) * 0.20
+	if absf(v81_last_facing.x) > 0.05:
 		v80_player_visual_root.scale.x = 0.82 * sign(v81_last_facing.x)
 		v80_player_visual_root.scale.y = 0.82
-
 	v81_last_player_position = player.position
 
 func change_class() -> void:
